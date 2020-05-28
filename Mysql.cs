@@ -45,7 +45,7 @@ namespace BSP
             {
                 if (String.IsNullOrEmpty(databaseName))
                     return false;
-                string connstring = String.Format("server={0};port={1};user id={2}; password={3}; database={4};", "localhost", "3360", "root", "124@bc45", "bsp");
+                string connstring = Properties.Settings.Default.bspConnectionString.ToString();
                 connection = new MySqlConnection(connstring);
                 connection.Open();
             }
@@ -56,7 +56,7 @@ namespace BSP
         public DataTable GetDataTable(string sql)
         {
             DataTable dt = new DataTable();
-            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(sql);
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(sql, connection);
             dataAdapter.Fill(dt);
             return dt;
 
