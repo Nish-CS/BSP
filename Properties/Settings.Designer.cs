@@ -25,12 +25,9 @@ namespace BSP.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=root;password=124@bc45;persistsecurityinfo=False;port=33" +
-            "60;database=bsp")]
-        public string bspConnectionString {
+        public char bspConnectionString {
             get {
-                return ((string)(this["bspConnectionString"]));
+                return ((char)(this["bspConnectionString"]));
             }
         }
     }
