@@ -18,10 +18,17 @@ namespace BSP
         }
 
         private string databaseName = string.Empty;
+        private string filterString = string.Empty;
+
         public string DatabaseName
         {
             get { return databaseName; }
             set { databaseName = value; }
+        }
+
+        public string FilterString
+        {
+            get { return filterString; }
         }
 
         public string Password { get; set; }
@@ -61,6 +68,30 @@ namespace BSP
             return dt;
 
         } 
+
+        public DataTable FilterBudget(string sPackage, string sFacility, string sFacilityDesc, string sCommodity, string sCommodityDesc, string sTotal, string sAllocation)
+        {
+            filterString = string.Empty;
+            DataTable dt = new DataTable();
+            MySqlDataAdapter dataAdapter;
+
+            if (!String.IsNullOrEmpty(sPackage.Trim()))
+            {
+                filterString = string.Format("Package LIKE '%{0}%' ", sPackage);                
+            }
+
+            if(filterString.Length != 0)
+            {
+                dataAdapter = new MySqlDataAdapter(string.Format("Select * FROM tblbudget WHERE {0}", filterString), connection);
+            } else
+            {
+                dataAdapter = new MySqlDataAdapter(string.Format("Select * FROM tblbudget", filterString), connection);
+            }
+
+            dataAdapter.Fill(dt);
+            return dt;
+
+        }
 
         public void Close()
         {
